@@ -25,42 +25,57 @@ body {
 .nav {
   display: flex;
   background: #374151;
+  padding: 5px;
+  gap: 5px;
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2);
 }
 
 .nav button {
   flex: 1;
-  padding: 14px;
-  border: none;
-  background: #374151;
+  padding: 12px;
+  border: 2px solid transparent;
+  background: #4b5563;
   color: white;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.2s;
+  font-size: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
+/* Hover effect */
 .nav button:hover {
-  background: #4b5563;
+  background: #6b7280;
+  border-color: #9ca3af;
 }
 
+/* Active tab */
 .nav button.active {
   background: #2563eb;
+  border: 2px solid #93c5fd;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
 }
 
 /* Content area */
 .container {
+  position: relative;
   height: calc(100vh - 110px);
+  overflow: hidden;
 }
 
 /* iFrames */
 iframe {
+  position: absolute;
   width: 100%;
   height: 100%;
   border: none;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 iframe.active {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 </style>
 </head>
@@ -72,13 +87,13 @@ iframe.active {
 </div>
 
 <div class="nav">
-  <button id="btnDealer" class="active" onclick="showPage('dealer', this)">
+  <button class="active" onclick="showPage('dealer', this)">
     Dealership Notes
   </button>
-  <button id="btnState" onclick="showPage('state', this)">
+  <button onclick="showPage('state', this)">
     State Lookup
   </button>
-  <button id="btnVin" onclick="showPage('VIN', this)">
+  <button onclick="showPage('VIN', this)">
     VIN Validator
   </button>
 </div>
@@ -91,20 +106,19 @@ iframe.active {
 
 <script>
 function showPage(pageId, btn) {
-  // Hide all frames
+  // Fade out all frames
   document.querySelectorAll("iframe").forEach(frame => {
     frame.classList.remove("active");
   });
 
-  // Show selected frame
+  // Fade in selected
   document.getElementById(pageId).classList.add("active");
 
-  // Remove active from all buttons
+  // Update buttons
   document.querySelectorAll(".nav button").forEach(button => {
     button.classList.remove("active");
   });
 
-  // Activate clicked button
   btn.classList.add("active");
 }
 </script>
