@@ -72,13 +72,13 @@ iframe.active {
 </div>
 
 <div class="nav">
-  <button id="btnDealer" class="active" onclick="showPage('dealer')">
+  <button id="btnDealer" class="active" onclick="showPage('dealer', this)">
     Dealership Notes
   </button>
-  <button id="btnState" onclick="showPage('state')">
+  <button id="btnState" onclick="showPage('state', this)">
     State Lookup
   </button>
-  <button id="btnState" onclick="showPage('VIN')">
+  <button id="btnVin" onclick="showPage('VIN', this)">
     VIN Validator
   </button>
 </div>
@@ -86,28 +86,26 @@ iframe.active {
 <div class="container">
   <iframe id="dealer" src="https://jstaylor1984.github.io/Dealership/" class="active"></iframe>
   <iframe id="state" src="https://jstaylor1984.github.io/Testing/"></iframe>
-<iframe id="VIN" src="https://www.carfaxbig.com/vin-validator.cfx"></iframe>
+  <iframe id="VIN" src="https://www.carfaxbig.com/vin-validator.cfx"></iframe>
 </div>
 
 <script>
-function showPage(pageId) {
+function showPage(pageId, btn) {
   // Hide all frames
   document.querySelectorAll("iframe").forEach(frame => {
     frame.classList.remove("active");
   });
 
-  // Show selected
+  // Show selected frame
   document.getElementById(pageId).classList.add("active");
 
-  // Update button styles
-  document.getElementById("btnDealer").classList.remove("active");
-  document.getElementById("btnState").classList.remove("active");
+  // Remove active from all buttons
+  document.querySelectorAll(".nav button").forEach(button => {
+    button.classList.remove("active");
+  });
 
-  if (pageId === "dealer") {
-    document.getElementById("btnDealer").classList.add("active");
-  } else {
-    document.getElementById("btnState").classList.add("active");
-  }
+  // Activate clicked button
+  btn.classList.add("active");
 }
 </script>
 
