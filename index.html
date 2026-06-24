@@ -131,5 +131,70 @@ function showPage(pageId, btn) {
 }
 </script>
 
+<!-- Premium Calculator -->
+<div id="premiumCalculator">
+  <div class="calc-row">
+    <label for="sixMonthPremium">6 Mo Premium</label>
+    <input
+      type="number"
+      id="sixMonthPremium"
+      oninput="calculateMonthlyPremium()"
+      placeholder="0.00">
+  </div>
+
+  <div class="calc-row">
+    <label for="monthlyPremium">Monthly</label>
+    <input type="text" id="monthlyPremium" readonly>
+  </div>
+</div>
+
+<style>
+#premiumCalculator {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 9999;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  font-size: 12px;
+  width: 220px;
+}
+
+#premiumCalculator .calc-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#premiumCalculator .calc-row:last-child {
+  margin-bottom: 0;
+}
+
+#premiumCalculator label {
+  width: 90px;
+  font-weight: bold;
+}
+
+#premiumCalculator input {
+  flex: 1;
+  padding: 4px;
+}
+</style>
+
+<script>
+function calculateMonthlyPremium() {
+  const sixMonthPremium =
+    parseFloat(document.getElementById('sixMonthPremium').value);
+
+  document.getElementById('monthlyPremium').value =
+    !isNaN(sixMonthPremium)
+      ? (sixMonthPremium / 6).toFixed(2)
+      : '';
+}
+</script>
+
 </body>
 </html>
